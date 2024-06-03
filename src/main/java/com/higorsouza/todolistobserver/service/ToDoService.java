@@ -38,12 +38,18 @@ public class ToDoService {
         ConsoleObserver consoleObserver = new ConsoleObserver(toDoList);
         toDoList.addObserver(consoleObserver);
         toDoList.addItem(item);
-        toDoListRepository.save(toDoList);
+        ToDoList itemSaved = toDoListRepository.save(toDoList);
+        System.out.println("::: " + itemSaved.getItems());
+        System.out.println("::::" + item);
         return item;
     }
 
     public Optional<ToDoList> getToDoList(Long listId) {
         logger.info("Obtendo a lista: {}", listId);
+        ToDoList toDoList = toDoListRepository.findById(listId).orElseThrow(() -> new RuntimeException("List not found"));
+        ConsoleObserver consoleObserver = new ConsoleObserver(toDoList);
+        toDoList.addObserver(consoleObserver);
+        toDoList.listItem();
         return toDoListRepository.findById(listId);
     }
 
@@ -69,8 +75,21 @@ public class ToDoService {
         }
     }
 
-    public void deleteToDoItem(Long itemId) {
+    public void deleteToDoItem(Long listId, Long itemId) {
         logger.info("Removendo item: {} ", itemId);
-        toDoItemRepository.deleteById(itemId);
+//        Optional<ToDoItem> item = toDoItemRepository.findById(itemId);
+//        if (item.isPresent()){
+//            toDoItemRepository.deleteById(itemId);
+
+            ToDoList toDoList = toDoListRepository.findById(listId).orElseThrow(() -> new RuntimeException("List not found"));
+            ToDoItem toDoItem = toDoItemRepository.findById(itemId).orElseThrow(() -> new RuntimeException("Item not found"));
+            ConsoleObserver consoleObserver = new ConsoleObserver(toDoList);
+            toDoList.addObserver(consoleObserver);
+            toDoList.removeItem(toDoItem);
+            toDoItemRepository.delete(toDoItem);
+            toDoListRepository.save(toDoList);
+
+//        }
+
     }
 }

@@ -85,3 +85,7 @@ Endpoint para gerenciar a lista de ToDo e itens da lista.
 - [x] Ticiano
 - [x] Emanuel
 - [x] Michel
+
+
+- remover uma lista
+- criar um nome para lista

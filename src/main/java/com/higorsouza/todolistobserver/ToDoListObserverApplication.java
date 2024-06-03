@@ -1,5 +1,8 @@
 package com.higorsouza.todolistobserver;
 
+import com.higorsouza.todolistobserver.model.ToDoItem;
+import com.higorsouza.todolistobserver.model.ToDoList;
+import com.higorsouza.todolistobserver.observer.ConsoleObserver;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

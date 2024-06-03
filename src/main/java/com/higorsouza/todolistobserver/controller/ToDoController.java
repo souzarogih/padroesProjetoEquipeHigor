@@ -16,7 +16,7 @@ public class ToDoController {
     private ToDoService toDoService;
 
     @PostMapping("/list")
-    public ToDoList createToDoList() {
+    public ToDoList createToDoList(@RequestBody String name) {
         return toDoService.createToDoList();
     }
 
@@ -35,9 +35,9 @@ public class ToDoController {
         return toDoService.getToDoItem(itemId);
     }
 
-    @DeleteMapping("/item/{itemId}")
-    public void deleteToDoItem(@PathVariable Long itemId) {
-        toDoService.deleteToDoItem(itemId);
+    @DeleteMapping("/list/{listId}/item/{itemId}")
+    public void deleteToDoItem(@PathVariable Long itemId, @PathVariable Long listId) {
+        toDoService.deleteToDoItem(listId, itemId);
     }
 
     @PatchMapping("/item/{itemId}")

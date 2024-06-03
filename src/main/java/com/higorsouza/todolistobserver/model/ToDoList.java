@@ -51,6 +51,11 @@ public class ToDoList implements Serializable {
         notifyObservers();
     }
 
+    public void listItem() {
+        getItems();
+        notifyObservers();
+    }
+
 
     public void addObserver(Observer observer) {
         observers.add(observer);
